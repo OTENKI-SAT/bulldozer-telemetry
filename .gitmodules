@@ -1,0 +1,3 @@
+[submodule "src"]
+	path = src
+	url = https://github.com/HEPTA-SAT-TRAINING/HEPTA-SAT-Library.git

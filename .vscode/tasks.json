@@ -1,0 +1,62 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Arduino: Build (Generic RP2350)",
+            "type": "process",
+            "command": "${env:LOCALAPPDATA}\\Programs\\Arduino IDE\\resources\\app\\lib\\backend\\resources\\arduino-cli.exe",
+            "args": [
+                "--config-file",
+                "${env:USERPROFILE}\\.arduinoIDE\\arduino-cli.yaml",
+                "compile",
+                "--fqbn",
+                "rp2040:rp2040:generic_rp2350",
+                "--build-path",
+                "${workspaceFolder}\\build",
+                "${workspaceFolder}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$gcc",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+        {
+            "label": "Arduino: Upload (Generic RP2350)",
+            "type": "process",
+            "command": "${env:LOCALAPPDATA}\\Programs\\Arduino IDE\\resources\\app\\lib\\backend\\resources\\arduino-cli.exe",
+            "args": [
+                "--config-file",
+                "${env:USERPROFILE}\\.arduinoIDE\\arduino-cli.yaml",
+                "upload",
+                "--fqbn",
+                "rp2040:rp2040:generic_rp2350",
+                "--port",
+                "${input:serialPort}",
+                "--input-dir",
+                "${workspaceFolder}\\build",
+                "${workspaceFolder}"
+            ],
+            "dependsOn": "Arduino: Build (Generic RP2350)",
+            "dependsOrder": "sequence",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "serialPort",
+            "type": "promptString",
+            "description": "Generic RP2350 のシリアルポート（例: COM3）"
+        }
+    ]
+}
